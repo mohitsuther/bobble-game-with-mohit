@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            padding-bottom: 80px;
+            width: 100%;
+            padding-top: 100px;
+            background-color: rgb(85, 222, 43);
+        }
+
+        .box {
+            width: 88%;
+           padding-bottom: 180px;
+            margin-inline: auto;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .index {
+            height: 120px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            border-radius: 5px;
+
+            background-color: rgb(33, 187, 43);
+        }
+
+        .rno,
+        .sno,
+        .pno {
+            height: 20px;
+            width: 20px;
+            padding: 15px;
+            font-weight: 800;
+            font-size: 20px;
+            margin: 4px;
+            border-radius: 10px;
+
+            background-color: aliceblue;
+        }
+
+        .r,
+        .s,
+        .p {
+            display: flex;
+
+        }
+
+        .pbtm {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 40px;
+            justify-content: center;
+            align-items: center;
+            margin-inline: auto;
+        }
+
+        .bubble {
+            height: 10px;
+            width: 10px;
+            padding: 20px;
+            margin: 10px;
+            font-size: 20px;
+            border-radius: 50%;
+            background-color: rgb(97, 228, 16);
+
+        }
+
+        .bubble:hover {
+            background-color: rgb(56, 154, 11);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="index">
+                <div class="r">
+                    <h1>no</h1>
+                    <div id="rno" class="rno"></div>
+                </div>
+                <div class="s">
+                    <h1>time</h1>
+                    <div id="sno" class="sno"></div>
+                </div>
+                <div class="p">
+                    <h1>score</h1>
+                    <div id="pno" class="pno"></div>
+                </div>
+
+            </div>
+            <div class="pbtm">
+                <div class="bubble">4</div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        var score = 0;
+        var ran = 0;
+        function b() {
+            var bubble = '';
+            for (var i = 0; i <= 70; i++) {
+
+                let cal = Math.floor(Math.random() * 10);
+                bubble += `<div class="bubble">${cal}</div>`;
+            }
+            document.querySelector('.pbtm').innerHTML = bubble;
+        }
+
+
+        var time = 60;
+        function runtimer() {
+            var timerun = setInterval(function () {
+                if (time > 0) {
+                    time--;
+                    document.querySelector("#sno").textContent = time;
+                }   
+                else {
+                    clearInterval(timerun);
+                    document.querySelector(".pbtm").innerHTML = `<h2>game over</h2>`;
+                }
+            }, 1000);
+        }
+
+        function norun() {
+            ran = Math.floor(Math.random() * 10);
+
+            document.querySelector("#rno").textContent = ran;
+        }
+        function scores() {
+            score += 10;
+
+            document.querySelector("#pno").textContent = score;
+
+        }
+
+        runtimer();
+        norun();
+        b();
+
+        document.querySelector(".pbtm").addEventListener('click', function (details) {
+            var countnum = Number(details.target.textContent);
+            if (countnum === ran) {
+                scores();
+                norun();
+                b();
+            }
+            else {
+                norun();
+                b();
+
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
